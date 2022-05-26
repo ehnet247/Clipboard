@@ -20,11 +20,6 @@ namespace Clipboard.Views
     /// </summary>
     public partial class ViewConfig : Window
     {
-        public ViewConfig(ViewModelConfig givenViewModel)
-        {
-            DataContext = givenViewModel;
-            InitializeComponent();
-        }
 
         public ViewConfig()
         {

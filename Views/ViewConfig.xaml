@@ -6,7 +6,43 @@
         xmlns:local="clr-namespace:Clipboard.Views"
         mc:Ignorable="d"
         Title="ViewConfig" Height="450" Width="800">
-    <Grid>
-        <Label Content="ViewConfig..." />
+    <DockPanel>
+    <Grid DockPanel.Dock="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="100"/>
+            <ColumnDefinition MinWidth="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0"
+               Content="Expressions:" />
+            <ListBox Grid.Row="1" Grid.Column="0" x:Name="ListExpressions"
+                 ItemsSource="{Binding ExpressionsNames}"
+                 SelectedValue="{Binding SelectedExpressionName}"
+                 SelectionMode="Single"
+                 SelectedItem="{Binding Selected}"/>
+        </Grid>
+    <Grid DockPanel.Dock="Bottom">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="140"
+                              Width="140"/>
+            <ColumnDefinition MinWidth="140"
+                              Width="140"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0"
+                    Width="140"
+                    Height="40"
+                Content="OK"/>
+            <Button Grid.Column="1" Grid.Row="0"
+                    Width="140"
+                    Height="40"
+                Content="Cancel"/>
+            <Label Content="Expressions" />
     </Grid>
+    </DockPanel>
 </Window>

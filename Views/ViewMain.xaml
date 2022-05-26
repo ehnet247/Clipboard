@@ -18,7 +18,7 @@
                  ItemsSource="{Binding ExpressionsNames}"
                  SelectedValue="{Binding SelectedExpressionName}"
                  SelectionMode="Single"
-                 SelectedItem="{Binding Selected}"/>
+                 SelectedItem="{Binding SelectedExpressionName}"/>
             <StackPanel Orientation="Horizontal">
                 <Button Content="Config" Command="{Binding CommandOpenConfigView}" Width="80"/>
                 <Button Content="Exit" Command="{Binding CommandExit}" Width="80"/>

@@ -37,7 +37,9 @@ namespace Clipboard
             {
                 try
                 {
-                    var viewConfig = new ViewConfig(new ViewModelConfig());
+                    var viewConfig = new ViewConfig();
+                    var viewModelConfig = new ViewModelConfig();
+                    viewConfig.DataContext = viewModelConfig;
                     viewConfig.Show();
                 }
                 catch (Exception ex)

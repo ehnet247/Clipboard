@@ -63,6 +63,8 @@ namespace Clipboard.ViewModels
             try
             {
                 viewConfig = new ViewConfig();
+                ViewModelConfig viewModel = new ViewModelConfig();
+                viewConfig.DataContext = viewModel;
                 viewConfig.Show();
             }
             catch (Exception ex)
