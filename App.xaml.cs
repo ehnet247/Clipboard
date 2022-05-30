@@ -38,7 +38,7 @@ namespace Clipboard
                 try
                 {
                     var viewConfig = new ViewConfig();
-                    var viewModelConfig = new ViewModelConfig();
+                    var viewModelConfig = new ViewModelConfig(viewConfig);
                     viewConfig.DataContext = viewModelConfig;
                     viewConfig.Show();
                 }

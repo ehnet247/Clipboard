@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using System.Diagnostics;
 using Clipboard.ViewModels;
 using Clipboard.Models;
 
@@ -15,9 +17,9 @@ namespace Clipboard.ViewModels
 {
     public class ViewModelConfig : ObservableRecipient
     {
-        public ObservableCollection<string> ExpressionsNames { get; set; }
-        public ObservableCollection<string> ExpressionsContent { get; set; }
-        //public ICommand CommandExit { get; }
+        public Expressions Expressions { get; set; }
+        public ICommand CommandOk { get; }
+        public ICommand CommandCancel { get; }
         private string selectedExpressionName;
         public string SelectedExpressionName
         {
@@ -29,49 +31,90 @@ namespace Clipboard.ViewModels
             {
                 selectedExpressionName = value;
                 SetExpressionContent();
+                OnPropertyChanged("SelectedExpressionName");
             }
         }
 
-        private string selectedExpressionContent;
-        public string SelectedExpressionContent
+        private string editingExpressionName;
+        public string EditingExpressionName
         {
             get
             {
-                return selectedExpressionContent;
+                return editingExpressionName;
             }
             set
             {
-                selectedExpressionContent = value;
+                editingExpressionName = value;
+                Expressions.ExpressionsList[CurrentExpressionIndex].Name = value;
+                Expressions.SetExpressionName(CurrentExpressionIndex, value);
+                OnPropertyChanged(nameof(EditingExpressionName));
             }
         }
 
+        private string editingExpressionContent;
+        public string EditingExpressionContent
+        {
+            get
+            {
+                return editingExpressionContent;
+            }
+            set
+            {
+                editingExpressionContent = value;
+                Expressions.ExpressionsList[CurrentExpressionIndex].Content = value;
+                OnPropertyChanged(nameof(EditingExpressionContent));
+            }
+        }
+
+        private int CurrentExpressionIndex;
+
+        private Window ConfigView;
+
         private void SetExpressionContent()
         {
-            for (int idx = 0; idx < ExpressionsNames.Count; idx++)
+            for (int idx = 0; idx < Expressions.ExpressionsList.Count; idx++)
             {
-                if (ExpressionsNames[idx] == SelectedExpressionName)
+                if (Expressions.ExpressionsList[idx].Name == SelectedExpressionName)
                 {
-                    SelectedExpressionContent = ExpressionsContent[idx];
+                    EditingExpressionContent = Expressions.ExpressionsList[idx].Content;
+                    EditingExpressionName = Expressions.ExpressionsList[idx].Name;
+                    CurrentExpressionIndex = idx;
                 }
             }
         }
 
-        public ViewModelConfig()
+        public ViewModelConfig(Window configWindow)
         {
-            ExpressionsNames = new ObservableCollection<string>();
-            ExpressionsContent = new ObservableCollection<string>();
-            // Fill-in the expression names list
-            foreach (string exprName in UserSettings.Default.ExpressionsNames)
-            {
-                if (exprName != null)
-                    ExpressionsNames.Add(exprName);
-            }
-            // Fill-in the expression content list
-            foreach (string exprContent in UserSettings.Default.Expressions)
-            {
+            ConfigView = configWindow;
+            Expressions = new Expressions();
+            // Initialize the commands
+            CommandOk = new RelayCommand(MethodSave);
+            CommandCancel = new RelayCommand(MethodCancel);
+        }
 
-                if (exprContent != null)
-                    ExpressionsContent.Add(exprContent);
+        private void MethodSave()
+        {
+            Expressions.Save();
+            try
+            {
+                ConfigView.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error encountered while closing the Config Window");
+            }
+        }
+
+        private void MethodCancel()
+        {
+            Expressions.Reset();
+            try
+            {
+                ConfigView.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error encountered while closing the Config Window");
             }
         }
     }
