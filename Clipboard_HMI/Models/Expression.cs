@@ -8,7 +8,7 @@ using Microsoft.Toolkit.Mvvm;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Diagnostics;
 
-namespace Clipboard.Models
+namespace Clipboard_HMI.Models
 {
     public class Expression : ObservableObject
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Clipboard.Models {
+namespace Clipboard_HMI.Models {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

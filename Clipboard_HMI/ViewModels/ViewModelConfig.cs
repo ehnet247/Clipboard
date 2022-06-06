@@ -10,10 +10,10 @@ using Microsoft.Toolkit.Mvvm;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Diagnostics;
-using Clipboard.ViewModels;
-using Clipboard.Models;
+using Clipboard_HMI.ViewModels;
+using Clipboard_HMI.Models;
 
-namespace Clipboard.ViewModels
+namespace Clipboard_HMI.ViewModels
 {
     public class ViewModelConfig : ObservableRecipient
     {

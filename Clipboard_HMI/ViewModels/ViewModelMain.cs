@@ -8,11 +8,11 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using Clipboard.Models;
-using Clipboard.Views;
+using Clipboard_HMI.Models;
+using Clipboard_HMI.Views;
 using System.Diagnostics;
 
-namespace Clipboard.ViewModels
+namespace Clipboard_HMI.ViewModels
 {
     public class ViewModelMain : ObservableRecipient
     {

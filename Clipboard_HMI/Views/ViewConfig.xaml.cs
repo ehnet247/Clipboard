@@ -11,21 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Clipboard_HMI.ViewModels;
 
-namespace Clipboard.Views
+namespace Clipboard_HMI.Views
 {
     /// <summary>
-    /// Interaction logic for ViewMain.xaml
+    /// Interaction logic for ViewConfig.xaml
     /// </summary>
-    public partial class ViewMain : Window
+    public partial class ViewConfig : Window
     {
-        public ViewMain(ViewModels.ViewModelMain viewModel)
-        {
-            InitializeComponent();
-            this.DataContext = viewModel;
-        }
 
-        public ViewMain()
+        public ViewConfig()
         {
             InitializeComponent();
         }

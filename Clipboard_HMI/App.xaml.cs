@@ -5,12 +5,12 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Clipboard.Views;
-using Clipboard.ViewModels;
-using Clipboard.Models;
+using Clipboard_HMI.Views;
+using Clipboard_HMI.ViewModels;
+using Clipboard_HMI.Models;
 using System.Diagnostics;
 
-namespace Clipboard
+namespace Clipboard_HMI
 {
     /// <summary>
     /// Interaction logic for App.xaml
