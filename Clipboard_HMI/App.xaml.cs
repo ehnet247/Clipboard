@@ -40,7 +40,8 @@ namespace Clipboard_HMI
                     var viewConfig = new ViewConfig();
                     var viewModelConfig = new ViewModelConfig(viewConfig);
                     viewConfig.DataContext = viewModelConfig;
-                    viewConfig.Show();
+                    viewConfig.ShowDialog();
+                    bool? result = viewConfig.DialogResult;
                 }
                 catch (Exception ex)
                 {

@@ -46,7 +46,7 @@ namespace Clipboard_HMI.ViewModels
             {
                 editingExpressionName = value;
                 Expressions.ExpressionsList[CurrentExpressionIndex].Name = value;
-                Expressions.SetExpressionName(CurrentExpressionIndex, value);
+                //Expressions.SetExpressionName(CurrentExpressionIndex, value);
                 OnPropertyChanged(nameof(EditingExpressionName));
             }
         }

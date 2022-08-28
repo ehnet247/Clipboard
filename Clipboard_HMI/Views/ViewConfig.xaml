@@ -40,15 +40,17 @@
         <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Grid.Column="0" Grid.Row="0"
+            <Button x:Name="Button_Ok" Grid.Column="0" Grid.Row="0"
                     Width="140"
                     Height="40"
                     Command="{Binding CommandOk}"
+                    Click="Button_Ok_Click"
                 Content="OK"/>
-            <Button Grid.Column="1" Grid.Row="0"
+            <Button x:Name="Button_Cancel" Grid.Column="1" Grid.Row="0"
                     Width="140"
                     Height="40"
                     Command="{Binding CommandCancel}"
+                    Click="Button_Cancel_Click"
                 Content="Cancel"/>
         </Grid>
     </DockPanel>

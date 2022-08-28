@@ -41,35 +41,56 @@ namespace Clipboard_HMI.ViewModels
             ExpressionsNames = new ObservableCollection<string>();
             ExpressionsContent = new ObservableCollection<string>();
             // Fill-in the expression names list
-            foreach (string exprName in UserSettings.Default.ExpressionsNames)
+            ReadExpressionsNames();
+            // Fill-in the expression content list
+            ReadExpressionsContent();
+            CommandOpenConfigView = new RelayCommand(OpenConfigViewMethod);
+            CommandExit = new RelayCommand(ExitMethod);
+        }
+
+        private void ReadExpressionsNames()
+        {
+            ExpressionsNames.Clear();
+            foreach (string? exprName in UserSettings.Default.ExpressionsNames)
             {
                 if (exprName != null)
                     ExpressionsNames.Add(exprName);
             }
-            // Fill-in the expression content list
-            foreach (string exprContent in UserSettings.Default.Expressions)
-            {
+        }
 
+        private void ReadExpressionsContent()
+        {
+            ExpressionsContent.Clear();
+            foreach (string? exprContent in UserSettings.Default.Expressions)
+            {
                 if (exprContent != null)
+                {
                     ExpressionsContent.Add(exprContent);
+                }
             }
-            CommandOpenConfigView = new RelayCommand(OpenConfigViewMethod);
-            CommandExit = new RelayCommand(ExitMethod);
         }
 
         private void OpenConfigViewMethod()
         {
             ViewConfig viewConfig;
+            bool? result = null;
             try
             {
                 viewConfig = new ViewConfig();
                 ViewModelConfig viewModel = new ViewModelConfig(viewConfig);
                 viewConfig.DataContext = viewModel;
-                viewConfig.Show();
+                viewConfig.ShowDialog();
+                result = viewConfig.DialogResult;
             }
             catch (Exception ex)
             {
                Debug.WriteLine(ex.Message);
+            }
+            if ((result != null) && (result == true))
+            {
+                // OK button has been clicked
+                UserSettings.Default.Save();
+                RefreshDisplay();
             }
 
         }
@@ -96,6 +117,16 @@ namespace Clipboard_HMI.ViewModels
         private void CopyToClipboard(string expressionToCopy)
         {
             System.Windows.Clipboard.SetText(expressionToCopy);
+        }
+
+        public void RefreshDisplay()
+        {
+            // Fill-in the expression names list
+            ReadExpressionsNames();
+            // Fill-in the expression content list
+            ReadExpressionsContent();
+            OnPropertyChanged(nameof(ExpressionsNames));
+            OnPropertyChanged(nameof(ExpressionsContent));
         }
     }
 }

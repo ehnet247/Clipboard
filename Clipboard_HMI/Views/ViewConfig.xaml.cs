@@ -25,5 +25,17 @@ namespace Clipboard_HMI.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Ok_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            this.Close();
+        }
+
+        private void Button_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
     }
 }
