@@ -140,8 +140,7 @@ namespace Clipboard_HMI.Models
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error encountered while saving the expressions:");
-                Debug.WriteLine(ex.Message);
+                Console.Error.WriteLine("Error encountered while saving the expressions:\r\n" + ex.Message);
             }
         }
 
@@ -153,8 +152,7 @@ namespace Clipboard_HMI.Models
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error encountered while reseting the expressions:");
-                Debug.WriteLine(ex.Message);
+                Console.Error.WriteLine("Error encountered while reseting the expressions:\r\n" + ex.Message);
             }
         }
 

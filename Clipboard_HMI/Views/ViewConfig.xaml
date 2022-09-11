@@ -5,53 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clipboard_HMI.Views"
         mc:Ignorable="d"
-        Title="ViewConfig" Height="450" Width="800">
+        Title="ViewConfig" Height="500" Width="600">
     <DockPanel>
     <Grid DockPanel.Dock="Top">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="100"/>
-            <ColumnDefinition MinWidth="100"/>
-            <ColumnDefinition MinWidth="100"/>
-        </Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="300"/>
+                <ColumnDefinition MinWidth="300"/>
+            </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0"
-               Content="Expressions:" />
-            <ListBox Grid.RowSpan="4" Grid.Row="1" Grid.Column="0" x:Name="ListExpressions"
+            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+                <Label Content="Expressions:" />
+                <ListBox Grid.Column="0" Grid.Row="1" x:Name="ListExpressions"
                  ItemsSource="{Binding Expressions.ExpressionsNameList}"
                  SelectionMode="Single"
                  SelectedItem="{Binding SelectedExpressionName}"/>
-            <Label Grid.Column="1" Grid.Row="0" Content="Name:"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding EditingExpressionName}"/>
-            <Label Grid.Column="1" Grid.Row="2" Content="Content:"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding EditingExpressionContent}"/>
+                <Button Content="New" Command="{Binding CommandNew}"
+                        Background="White"
+                        Width="70" Height="30"
+                        Margin="0 5 0 0"
+                        HorizontalAlignment="Right"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
+                <Label Content="Name:"/>
+            <TextBox Text="{Binding EditingExpressionName}" Height="25"/>
+            <Label Content="Content:"/>
+            <TextBox Text="{Binding EditingExpressionContent}" Height="25"/>
+            </StackPanel>
         </Grid>
-    <Grid DockPanel.Dock="Bottom">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="140"
-                              Width="140"/>
-            <ColumnDefinition MinWidth="140"
-                              Width="140"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button x:Name="Button_Ok" Grid.Column="0" Grid.Row="0"
-                    Width="140"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
+            <Button x:Name="Button_Ok"
+                    Width="120"
                     Height="40"
+                    Margin="10"
+                    Background="LightBlue"
                     Command="{Binding CommandOk}"
                     Click="Button_Ok_Click"
                 Content="OK"/>
-            <Button x:Name="Button_Cancel" Grid.Column="1" Grid.Row="0"
-                    Width="140"
+            <Button x:Name="Button_Cancel"
+                    Width="120"
                     Height="40"
+                    Margin="10"
+                    Background="LightCoral"
                     Command="{Binding CommandCancel}"
                     Click="Button_Cancel_Click"
                 Content="Cancel"/>
-        </Grid>
+        </StackPanel>
     </DockPanel>
 </Window>

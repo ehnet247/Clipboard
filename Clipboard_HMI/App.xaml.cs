@@ -29,7 +29,7 @@ namespace Clipboard_HMI
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Console.Error.WriteLine(ex.Message);
             }
 
             // If no expressions are stored, open the Settings view
@@ -45,7 +45,7 @@ namespace Clipboard_HMI
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    Console.Error.WriteLine(ex.Message);
                 }
             }
             else
@@ -59,7 +59,7 @@ namespace Clipboard_HMI
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    Console.Error.WriteLine(ex.Message);
                 }
             }
         }

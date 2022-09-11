@@ -74,24 +74,24 @@ namespace Clipboard_HMI.ViewModels
         {
             ViewConfig viewConfig;
             bool? result = null;
-            try
-            {
-                viewConfig = new ViewConfig();
-                ViewModelConfig viewModel = new ViewModelConfig(viewConfig);
-                viewConfig.DataContext = viewModel;
-                viewConfig.ShowDialog();
-                result = viewConfig.DialogResult;
-            }
-            catch (Exception ex)
-            {
-               Debug.WriteLine(ex.Message);
-            }
-            if ((result != null) && (result == true))
-            {
-                // OK button has been clicked
-                UserSettings.Default.Save();
-                RefreshDisplay();
-            }
+                try
+                {
+                    viewConfig = new ViewConfig();
+                    ViewModelConfig viewModel = new ViewModelConfig(viewConfig);
+                    viewConfig.DataContext = viewModel;
+                    viewConfig.ShowDialog();
+                    result = viewConfig.DialogResult;
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine("Error encountered while opening the Config View:\r\n" + ex.Message);
+                }
+                if ((result != null) && (result == true))
+                {
+                    // OK button has been clicked
+                    UserSettings.Default.Save();
+                    RefreshDisplay();
+                }
 
         }
 

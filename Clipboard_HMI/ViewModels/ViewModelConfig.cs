@@ -18,6 +18,7 @@ namespace Clipboard_HMI.ViewModels
     public class ViewModelConfig : ObservableRecipient
     {
         public Expressions Expressions { get; set; }
+        public ICommand CommandNew { get; }
         public ICommand CommandOk { get; }
         public ICommand CommandCancel { get; }
         private string selectedExpressionName;
@@ -88,8 +89,25 @@ namespace Clipboard_HMI.ViewModels
             ConfigView = configWindow;
             Expressions = new Expressions();
             // Initialize the commands
+            CommandNew = new RelayCommand(MethodNew);
             CommandOk = new RelayCommand(MethodSave);
             CommandCancel = new RelayCommand(MethodCancel);
+        }
+
+        private void MethodNew()
+        {
+            var newExpression = new Clipboard_HMI.Models.Expression()
+            {
+                Name = "New Name",
+                Content = "New Content"
+            };
+            if (newExpression != null)
+            {
+                Expressions.ExpressionsList.Add(newExpression);
+                Expressions.ExpressionsNameList.Add(newExpression.Name);
+                OnPropertyChanged(nameof(Expressions.ExpressionsNameList));
+            }
+
         }
 
         private void MethodSave()
@@ -101,20 +119,20 @@ namespace Clipboard_HMI.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error encountered while closing the Config Window");
+                Console.Error.WriteLine("Error encountered while closing the Config Window:\r\n"+ex.Message);
+
             }
         }
 
         private void MethodCancel()
         {
-            Expressions.Reset();
             try
             {
                 ConfigView.Close();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error encountered while closing the Config Window");
+                Console.Error.WriteLine("Error encountered while closing the Config Window:\r\n" + ex.Message);
             }
         }
     }
