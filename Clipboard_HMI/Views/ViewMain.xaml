@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clipboard_HMI.Views"
         mc:Ignorable="d"
-        Title="ViewMain" Height="300" Width="160"
+        Title="ViewMain" Height="300" Width="200"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="False" >
@@ -13,16 +13,14 @@
         <SolidColorBrush Opacity="0.5" Color="White" />
     </Window.Background>
     <DockPanel>
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-            <ListBox x:Name="ListExpressions"
+        <ListBox x:Name="ListExpressions" DockPanel.Dock="Top"
                  ItemsSource="{Binding ExpressionsNames}"
                  SelectedValue="{Binding SelectedExpressionName}"
                  SelectionMode="Single"
                  SelectedItem="{Binding SelectedExpressionName}"/>
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Config" Command="{Binding CommandOpenConfigView}" Width="80"/>
-                <Button Content="Exit" Command="{Binding CommandExit}" Width="80"/>
-            </StackPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+            <Button Content="Config" Command="{Binding CommandOpenConfigView}" Width="80" Height="40"/>
+            <Button Content="Exit" Command="{Binding CommandExit}" Width="80" Height="40"/>
         </StackPanel>
     </DockPanel>
 </Window>
